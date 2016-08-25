@@ -1,8 +1,7 @@
 yum_package 'httpd'
 
-yum_package 'nodejs'
+yum_package 'php'
 
-yum_package 'npm'
 
 
 service 'httpd' do
