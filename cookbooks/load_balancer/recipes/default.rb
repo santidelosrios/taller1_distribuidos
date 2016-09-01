@@ -1,1 +1,0 @@
-include_recipe "load_balancer::load_balancer"

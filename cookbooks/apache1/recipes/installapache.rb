@@ -2,7 +2,9 @@ yum_package 'httpd'
 
 yum_package 'php'
 
-
+yum_package "php-pgsql" do
+    action :install
+end
 
 service 'httpd' do
   supports :status => true, :restart => true, :reload => true
