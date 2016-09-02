@@ -32,6 +32,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     	chef2.json = {"aptmirror" => {"server" => "192.168.131.254"}}
     end
   end
+config.vm.define :centos_database do |node3|
+    node3.vm.box = "centos64-updated"
+    node3.vm.network :private_network, ip: "192.168.56.104"
+    node3.vm.network "public_network", :bridge => "eth4", ip:"192.168.131.174", :auto_config => "false", :netmask => "255.255.255.0"
+    node3.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "1024","--cpus", "4", "--name", "centos_database" ]
+    end
+    config.vm.provision :chef_solo do |chef4|
+        chef4.cookbooks_path = "cookbooks"
+        chef4.add_recipe "mirror"
+        chef4.add_recipe "postgres"
+        chef4.json = {"aptmirror" => {"server" => "192.168.131.254"}}
+    end
+  end
    config.vm.define :centos_balance do |node2|
     node2.vm.box = "centos64-updated"
     node2.vm.network :private_network, ip: "192.168.56.101"
@@ -44,20 +58,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         chef.add_recipe "mirror"
         chef.add_recipe "haproxy"
         chef.json = {"aptmirror" => {"server" => "192.168.131.254"}}
-    end
-  end
-  config.vm.define :centos_database do |node3|
-    node3.vm.box = "centos64-updated"
-    node3.vm.network :private_network, ip: "192.168.56.104"
-    node3.vm.network "public_network", :bridge => "eth4", ip:"192.168.131.174", :auto_config => "false", :netmask => "255.255.255.0"
-    node3.vm.provider :virtualbox do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "1024","--cpus", "4", "--name", "centos_database" ]
-    end
-    config.vm.provision :chef_solo do |chef4|
-    	chef4.cookbooks_path = "cookbooks"
-    	chef4.add_recipe "mirror"
-        chef4.add_recipe "postgres"
-    	chef4.json = {"aptmirror" => {"server" => "192.168.131.254"}}
     end
   end
 end
