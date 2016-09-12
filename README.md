@@ -1,6 +1,6 @@
 # taller1_distribuidos
-Taller 1 Sistemas Distribuidos 2016-2
-Previamente hay que tener instalado Vagrant en la computadora que se desea realizar el aprovisionamiento.
+Taller 1 Sistemas Distribuidos 2016-2 <br>
+Previamente hay que tener instalado Vagrant en la computadora que se desea realizar el aprovisionamiento. <br>
 1. Clonar repositorio <br>
 2. Habilitar la sub.interfaz con el comando ifcofig eth4:0 192.168.131.179 <br>
 3. Ejecutar el comando vagrant up <br>
